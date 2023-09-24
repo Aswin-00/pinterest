@@ -1,0 +1,23 @@
+# name : admin
+# password : admin
+
+# user model :- user detail 
+                        :-username
+                        :-password
+                        :-photo
+                        :-fname
+                        :-lname
+                        :-about
+                        :-usid
+                        :-email
+                
+                        
+            :- pin
+                :- image 
+                :- pid
+            pin---saved---user_detail
+
+
+
+# user page : upload image ,remove image ,views image 
+# user detail edit 

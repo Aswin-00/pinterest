@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>singup</title>
+</head>
+<body>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h1>sing up</h1>
+    <div>
+      <label for="fname">fist name</label>
+      <input type="text" name="fname" >
+
+      <label for="lname">last name</label>
+      <input type="text" name="lname" >
+
+    </div>
+
+    <div>
+      <label for="dob">DOB</label>
+      <input type="date" name="dob" required >
+    </div>
+
+    <div>
+      <label for="pic">profile pic</label>
+      <input type="file" name="pic" >
+    </div>
+
+   
+    <div>
+      <label for="email">email</label>
+      <input type="email" name="email" >
+    </div>
+
+    
+    <div>
+        <label for="username">username</label>
+        <input type="text" name="username" required>
+    </div>
+    
+    <div>
+      <label for="password">password</label>
+      <input type="password" name="password" >
+  </div>
+
+  <div>
+      <button type="submit">create</button>
+  </div>
+  
+  </form>
+</body>
+</html>
