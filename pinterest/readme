@@ -1,23 +1,42 @@
-# name : admin
-# password : admin
 
-# user model :- user detail 
-                        :-username
-                        :-password
-                        :-photo
-                        :-fname
-                        :-lname
-                        :-about
-                        :-usid
-                        :-email
-                
-                        
-            :- pin
-                :- image 
-                :- pid
-            pin---saved---user_detail
+#super user  password
+
+name : admin
+password : admin
 
 
 
-# user page : upload image ,remove image ,views image 
-# user detail edit 
+#thing which are installed 
+
+asgiref==3.7.2
+Django==4.2.5
+Pillow==10.0.1
+postgres==4.0
+psycopg2-binary==2.9.7
+psycopg2-pool==1.1
+sqlparse==0.4.4
+typing_extensions==4.8.0
+
+#models created
+
+1.user
+2.userpins
+
+
+#code to be  understood 
+ 
+#session 
+ user_data=user.objects.get(username=username,password=password)
+
+field_names=[x.name for x in user_data._meta.fields]
+
+for filed_name in field_names:
+    field_value=getattr(user_data,filed_name)
+
+    request.session[filed_name]=str(field_value)
+
+#overrind class userupdate to recive a pk 
+
+ def get_object(self, queryset=None):
+        uid = self.kwargs.get('uid')  # Get 'uid' from URL parameters
+        return user.objects.get(uid=uid)  # Fetch the User by 'uid'
