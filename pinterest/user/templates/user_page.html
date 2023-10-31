@@ -4,23 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>user profile</title>
+    <style>
+           
+           .navbar {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.navbar button {
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.navbar button:hover {
+  background-color: #ccc;
+}
+
+.navbar .edit-user {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.navbar .logout {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.navbar .search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .search-bar input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 5px;
+  width: 200px;
+}
+
+.navbar .search-bar button {
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+}
+
+
+
+
+
+    </style>
 </head>
+
 <body>
     <!-- footer section -->
 
     <!-- user profile -->
 <br>
-    <button><a href="{% url 'logout' %}">sing out</a></button>
+<div>
+    <div class="navbar">
+        <div class="threeline">
+        <button class="edit-user"><a href="/edit/{{request.session.uid}}">Setting</a></button>
+        <button><a href="{% url 'logout' %}">Sign Out</a></button>
+        </div>
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+            <button type="submit">Search</button>
+        </div>
+    </div>
     <div>
+
     <h1><b>Name</b>:{{request.session.username}}</h1>
-    {% with pic=request.session.pic %}
-    <img src="{{pic.url}}" alt="img">
-    {% endwith %}
+    <img src="request.session.pic" alt="img">
+
     </div>
     <!-- edit user profile  -->
-    <div>
-        <button class="edit_user"><a href="/edit/{{request.session.uid}}">setting </a></button>
-    </div>
+    
 <br>
     <!-- image upload section -->
     <div>

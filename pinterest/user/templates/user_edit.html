@@ -1,19 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>user edit </title>
+    <title>signup</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #e1e1e1;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="date"],
+        input[type="email"],
+        input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e1e1e1;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #e60023;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ff1744;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>user edit </h1>
-    <form method="post" >
-        {%csrf_token%}
-         
-         {{form.as_p}}
+    <div class="container">
+        <h1>Sign up for Pinterest</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form}}
 
-         <button type="submit">ok</button>
-    </form>
-
+            <button type="submit">Update</button>
+        </form>
+    </div>
 </body>
+
 </html>

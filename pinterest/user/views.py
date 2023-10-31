@@ -1,17 +1,20 @@
-import json
+
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from .models import *
-from django.views.generic import ListView,UpdateView
-# Create your views here.
+from django.views.generic import UpdateView
 
+
+
+#login
 def login(request):
     if request.method=='POST':
         username=request.POST['username']
         password=request.POST['password']
-        if user.objects.filter(username=username).exists():
-            if user.objects.filter(password=password).exists():
+        call=user.objects.filter(username=username)
+        if call.exists():
+            if call.filter(password=password).exists():
                 user_data=user.objects.get(username=username,password=password)
 
                 field_names=[x.name for x in user_data._meta.fields]
@@ -34,7 +37,7 @@ def login(request):
 
     return render(request,'login.html')
 
-
+#user singup fuction
 def singup(request):
     if request.method=='POST':
         fname=request.POST['fname']
@@ -49,20 +52,34 @@ def singup(request):
             pic=''
 
         uid=username+(str(dob).replace('-',''))
-        user.objects.create(fname=fname,lname=lname,pic=pic,email=email,username=username,password=password,uid=uid,dob=dob)
+        try:
+
+            user.objects.create(fname=fname,lname=lname,pic=pic,email=email,username=username,password=password,uid=uid,dob=dob)
+
+        except: 
+            message = "user  alredy exiting "
+            send_location='/singup'
+            response = HttpResponse(f'<script>alert("{message}");  window.location.href = "{send_location}"; </script>',content_type="text/html")
+            return response
         
-        return redirect('login')
+        message = "successful signup please login  "
+        send_location='/login'
+        response = HttpResponse(f'<script>alert("{message}");  window.location.href = "{send_location}"; </script>',content_type="text/html")
+        return response
+            
         
         
     return render(request,'singup.html')
 
 
-
+#user profile 
 def user_page(request):
     uid=request.session['uid']
     user_pins =userpins.objects.filter(userid=uid)
     return render(request,'user_page.html',{'user_pins':user_pins})
 
+
+#user updation  done by overriding the buildin class UpdateView 
 class userupdate(UpdateView):
     model=user
     fields=['fname','lname','email','username','password','pic','dob']
@@ -74,7 +91,7 @@ class userupdate(UpdateView):
         return user.objects.get(uid=uid)  # Fetch the User by 'uid'
 
 
-
+#pin creationn
 def create_pin(request,uid):
     if request.method=='POST':
         pin=request.FILES['pin']
@@ -84,13 +101,13 @@ def create_pin(request,uid):
 
         return  redirect('userpage')
 
-
+#pin delete
 def delete_pin(request,pk):
     de=userpins.objects.get(id=pk)
     de.delete()
     return  redirect('userpage')
 
-
+#user logout
 def logout(request):
     request.session.clear()
     return redirect('login')
