@@ -105,9 +105,17 @@ def create_pin(request,uid):
 def delete_pin(request,pk):
     de=userpins.objects.get(id=pk)
     de.delete()
+    
     return  redirect('userpage')
 
 #user logout
 def logout(request):
     request.session.clear()
     return redirect('login')
+
+
+#index page
+def index(request):
+    user_pins =userpins.objects.all()
+    context={'user_pins':user_pins}
+    return render(request,'index.html',context)

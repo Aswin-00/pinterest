@@ -74,8 +74,7 @@
 <div>
     <div class="navbar">
         <div class="threeline">
-        <button class="edit-user"><a href="/edit/{{request.session.uid}}">Setting</a></button>
-        <button><a href="{% url 'logout' %}">Sign Out</a></button>
+              <button><a href="{% url 'login' %}">log Out</a></button>
         </div>
         <!-- Search Bar -->
         <div class="search-bar">
@@ -83,27 +82,11 @@
             <button type="submit">Search</button>
         </div>
     </div>
-    <div>
-
-    <h1><b>Name</b>:{{request.session.username}}</h1>
-    <img src="{{request.session.pic}}" alt="img">
-
-    </div>
     <!-- edit user profile  -->
     
 <br>
     <!-- image upload section -->
-    <div>
-        <form method="POST" enctype="multipart/form-data" action="/createpin/{{request.session.uid}}" >
-            {% csrf_token %}
-        <label for="tag">Title</label>
-        <input type="text" name="title" required>
-        <br>
-        <label for="pin"><b>pin</b></label>
-        <input type="file" name="pin" placeholder="pin" required>
-         <button type="submit" style="font-size: 30px;">ok</button>
-    </form>
-    </div>
+    
 <br>
 
     <!-- image view sessction -->
