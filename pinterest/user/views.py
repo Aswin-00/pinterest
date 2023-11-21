@@ -15,15 +15,21 @@ def login(request):
         call=user.objects.filter(username=username)
         if call.exists():
             if call.filter(password=password).exists():
+                request.session['set']='ok'
                 user_data=user.objects.get(username=username,password=password)
 
                 field_names=[x.name for x in user_data._meta.fields]
                 
                 for filed_name in field_names:
                     field_value=getattr(user_data,filed_name)
-                    request.session[filed_name]=str(field_value)
 
-                return redirect('userpage')
+                    if filed_name=='pic':
+                        request.session[filed_name]=field_value.url    
+                    else:
+                        request.session[filed_name]=str(field_value)
+                    
+
+                return redirect('/')
             
             else:
                 message='wrong password'
@@ -111,7 +117,8 @@ def delete_pin(request,pk):
 #user logout
 def logout(request):
     request.session.clear()
-    return redirect('login')
+    # del request.session['set']
+    return redirect('index')
 
 
 #index page
@@ -119,3 +126,37 @@ def index(request):
     user_pins =userpins.objects.all()
     context={'user_pins':user_pins}
     return render(request,'index.html',context)
+
+
+#post page 
+
+def post_page(request,imgid):
+    all_pins=userpins.objects.all()
+    post=all_pins.filter(id=imgid).get()
+
+    all_pins=all_pins.exclude(userid=imgid)
+
+    print(post.pin.url)
+    comments='all name'
+    # comments=comments.objects.filter(imgid=imgid)
+
+    context={'post':post.pin.url,'imgid':imgid,'tag':post.tag,'comments':comments,'all_pins':all_pins}
+    return render(request,'post_page.html',context)
+
+#make a comment 
+
+#recive post id and user id and content from while making a reqeuesst
+
+def comment(request,imgid):
+    if request.method=='POST':
+        content=request.POST.get('content')
+        print(content)
+        
+        try:
+            print(request.session['uid'])
+        except:
+            return redirect ('login')
+        
+        print(imgid)
+
+    return redirect(f'/post_page/{imgid}')

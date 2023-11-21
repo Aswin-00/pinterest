@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinterest</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'post_page.css'%}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+</head>
+<body>
+    {% include 'header.html' %}
+    
+    <!-- #post section -->
+    <div class="main_image_container">
+        <!-- #show posts -->
+        <div class="image_container">
+            
+            <img  class="post"
+            src="{{post}}" alt="{{tag}}">
+            <a href=""'><img src="{% static 'user.jpeg' %}" alt="logo" width="40" height="40"></a>
+
+            
+        </div>
+        <!-- #comments by users -->
+        <div class="comment">
+            <!-- #all comments -->
+            <p>'all the best'</p>
+
+            <!-- # user form to give a comment  -->
+            <form action="/comment/{{imgid}}" method="POST">
+                {% csrf_token %}
+                <input type="textbox" name="content">
+                <button type="submit">post</button>
+            </form>
+            
+
+        </div>
+
+    </div>
+         
+    <!-- #all other posts -->
+     <div>
+ 
+        <div class="container">
+            {%for i in all_pins %}
+    
+            <div class="card card_small">
+               <a href="/post_page/{{i.id}}" ><img src="{{i.pin.url}}" alt="{{i.tag}}"></a> 
+                
+            </div> 
+            {% endfor %}    
+        </div>
+
+     </div>
+
+    
+</body>
+</html>

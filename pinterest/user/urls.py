@@ -3,8 +3,8 @@ from .views import *
 
 urlpatterns = [
     
-    path('login/',login,name='login'),
     path('',index,name='index'), 
+    path('login/',login,name='login'),
     path('logout/',logout,name='logout'),
     path('singup/',singup,name='singup'),
     path('userpage/',user_page,name='userpage'),
@@ -12,4 +12,7 @@ urlpatterns = [
     path('createpin/<str:uid>',create_pin), 
     path('deletepin/<str:imgid>',delete_pin), 
     path('removepin/<int:pk>',delete_pin),
+    path('post_page/<int:imgid>',post_page),
+    path('comment/<int:imgid>',comment)
+    
 ]

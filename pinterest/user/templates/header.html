@@ -1,0 +1,33 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+<div class="nav">
+  {% if 'set' not in request.session %}
+  <li><img src="{% static 'logo.png'%}" alt="logo" width="30" height="30"></li>
+  <li><a href="{% url 'index' %}">Home</a></li>
+  <li><a href="{% url 'login'%}">Login</a></li>
+
+  <li class="search">
+      
+          <input type="search" placeholder="Search">
+  </li>
+  <li class="notification"><i class="fas fa-bell"></i></li>
+  <li><i class="far fa-comment-dots"></i></li>
+  <li><a href="{% url 'singup' %}">Singup</a></li>
+  {% else %}
+  <li><img src="{% static 'logo.png'%}" alt="logo" width="30" height="30"></li>
+  <li><a href="{% url 'index' %}">Home</a></li>
+  <li></li>
+  <li><a href="/edit/{{request.session.uid}}">Setting</a></li>
+
+  <li class="search">
+      
+          <input type="search" placeholder="Search">
+  </li>
+  <li class="notification"><i class="fas fa-bell"></i></li>
+  <li><i class="far fa-comment-dots"></i></li>
+  <li><a href="{% url 'userpage' %}"'><img src="{{request.session.pic}}" alt="logo" width="30" height="30"></a></li>
+
+  <li><a href="{% url 'logout' %}">logout</a></li>
+  {% endif %}
+</div>
