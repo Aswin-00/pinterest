@@ -30,6 +30,14 @@ class userpins(models.Model):
     
 #content ,#pinid,#usrid #dateofcreation 
 
+class commets(models.Model):
+    userid=models.CharField(null=False,max_length=40)
+    pinid=models.CharField(null=False,max_length=40)
+    content=models.CharField(null=False,max_length=200)
+    date=models.DateField(auto_now=True)
+
+    def __str__(self):
+        return (f'{self.pinid}')
 
 
     

@@ -4,3 +4,4 @@ from .models import *
 
 admin.site.register(user)
 admin.site.register(userpins)
+admin.site.register(commets)

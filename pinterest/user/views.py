@@ -36,10 +36,7 @@ def login(request):
                 send_location=request.path
 
         else :
-            message = "user data does eixit"
-            send_location='singup/'
-        response = HttpResponse(f'<script>alert("{message}");  window.location.href = "{send_location}"; </script>',content_type="text/html")
-        return response
+         return my_pop_up("user data does eixit",'/singup')
 
     return render(request,'login.html')
 
@@ -137,26 +134,41 @@ def post_page(request,imgid):
     all_pins=all_pins.exclude(userid=imgid)
 
     print(post.pin.url)
-    comments='all name'
-    # comments=comments.objects.filter(imgid=imgid)
+    post_comments=commets.objects.filter(pinid=imgid).order_by('-id')
 
-    context={'post':post.pin.url,'imgid':imgid,'tag':post.tag,'comments':comments,'all_pins':all_pins}
+    context={'post':post.pin.url,'imgid':imgid,'tag':post.tag,'comments':post_comments,'all_pins':all_pins}
     return render(request,'post_page.html',context)
 
 #make a comment 
 
-#recive post id and user id and content from while making a reqeuesst
-
 def comment(request,imgid):
-    if request.method=='POST':
-        content=request.POST.get('content')
-        print(content)
-        
-        try:
-            print(request.session['uid'])
-        except:
-            return redirect ('login')
-        
-        print(imgid)
+    if 'uid' in request.session:
+        if request.method=='POST':
+                content=request.POST.get('content')
+                try:
+                    commets.objects.create(
+                        userid=request.session['uid'],
+                        pinid=imgid,
+                        content=content,
+                    )
+                except Exception as e:
+                    print(e)
 
+    else:
+        return my_pop_up('please login to your account','/login')
+        
     return redirect(f'/post_page/{imgid}')
+
+
+
+# javascript message box
+def my_pop_up(message,location):
+    send_location=location
+    response = HttpResponse(f'<script>alert("{message}");  window.location.href = "{send_location}"; </script>',content_type="text/html")
+    return response
+       
+
+
+#comments show 
+
+

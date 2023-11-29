@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pinterest</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="{% static 'main.js' %}"></script>
     <link rel="stylesheet" href="{% static 'post_page.css'%}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 </head>
@@ -24,18 +25,32 @@
             
         </div>
         <!-- #comments by users -->
-        <div class="comment">
+        
+        <div class="comments_container">
             <!-- #all comments -->
-            <p>'all the best'</p>
+            {% for comment in comments %}
+            
+            <div class="user_comments">
+                <a href=""><img src="{% static 'user.jpeg' %}" alt="logo" width="40" height="40">{{comment.userid}}</a>
+                <p>{{comment.content}}</p>
+                {% if 'set' in request.session and request.session.uid == comment.userid  %}
+                    <a href="">edit</a>
 
+                {% endif%}
+           
+                
+            </div>
+            
+            {% endfor %}
             <!-- # user form to give a comment  -->
-            <form action="/comment/{{imgid}}" method="POST">
+            <form action="/comment/{{imgid}}" method="POST" onsubmit="return validateForm()">
                 {% csrf_token %}
-                <input type="textbox" name="content">
+                <textarea name="content" id="content" cols="30" rows="10"></textarea>
+
                 <button type="submit">post</button>
             </form>
-            
 
+            
         </div>
 
     </div>

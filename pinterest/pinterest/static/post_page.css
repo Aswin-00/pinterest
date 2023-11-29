@@ -15,3 +15,12 @@
 .comment{
     margin: 1%;
 }
+
+
+/* .user_comments{
+    display: flex;  
+    align-items: center;
+} */
+
+
+body{background: #eee}.date{font-size: 11px}.comment-text{font-size: 12px}.fs-12{font-size: 12px}.shadow-none{box-shadow: none}.name{color: #007bff}.cursor:hover{color: blue}.cursor{cursor: pointer}.textarea{resize: none}
