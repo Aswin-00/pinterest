@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinterest</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="{% static 'main.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'post_page.css'%}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+</head>
+<body>
+    {% include 'header.html' %}
+             
+    <!-- #all other posts -->
+     <div>
+        
+        {% if all_pins %}
+        <div class="container">
+            {%for i in all_pins %}
+    
+            <div class="card card_small">
+               <a href="/post_page/{{i.id}}" ><img src="{{i.pin.url}}" alt="{{i.tag}}"></a> 
+                
+            </div> 
+            {% endfor %}    
+        </div>
+        {% else %}
+        <h1>no data found</h1>
+        {% endif %}
+     </div>
+
+    
+</body>
+</html>

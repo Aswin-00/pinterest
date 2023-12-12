@@ -13,6 +13,7 @@ urlpatterns = [
     path('deletepin/<str:imgid>',delete_pin), 
     path('removepin/<int:pk>',delete_pin),
     path('post_page/<int:imgid>',post_page),
-    path('comment/<int:imgid>',comment)
+    path('comment/<int:imgid>',comment),
+    path('search/',search),
     
 ]

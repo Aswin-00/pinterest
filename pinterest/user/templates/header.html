@@ -1,4 +1,5 @@
 {% load static %}
+
 <link rel="stylesheet" href="{% static 'style.css' %}">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <div class="nav">
@@ -6,11 +7,14 @@
   <li><img src="{% static 'logo.png'%}" alt="logo" width="30" height="30"></li>
   <li><a href="{% url 'index' %}">Home</a></li>
   <li><a href="{% url 'login'%}">Login</a></li>
-
   <li class="search">
-      
-          <input type="search" placeholder="Search">
-  </li>
+      <form action="search/" method="POST" class="search">
+                {% csrf_token%}
+          <input  type="search" placeholder="Search" id="search_tag" name="search_tag">
+
+       </form>
+
+
   <li class="notification"><i class="fas fa-bell"></i></li>
   <li><i class="far fa-comment-dots"></i></li>
   <li><a href="{% url 'singup' %}">Singup</a></li>
@@ -21,8 +25,11 @@
   <li><a href="/edit/{{request.session.uid}}">Setting</a></li>
 
   <li class="search">
-      
-          <input type="search" placeholder="Search">
+      <form action="search/" method="POST">
+                {% csrf_token%}
+          <input type="search" placeholder="Search" id="search_tag" name="search_tag">
+
+       </form>
   </li>
   <li class="notification"><i class="fas fa-bell"></i></li>
   <li><i class="far fa-comment-dots"></i></li>

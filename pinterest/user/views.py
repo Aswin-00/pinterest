@@ -169,6 +169,12 @@ def my_pop_up(message,location):
        
 
 
-#comments show 
-
-
+#serch show 
+def search(request):
+    if request.method=="POST":
+        tag=request.POST.get('search_tag')
+        all_pins =userpins.objects.filter(tag=tag)
+        context={'all_pins':all_pins}
+        return render(request,'search_page.html',context)
+    
+    
