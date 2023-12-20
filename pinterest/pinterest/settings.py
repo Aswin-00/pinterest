@@ -25,6 +25,7 @@ SECRET_KEY = 'django-insecure-$_vt+5)aby*ds#7b&(@9^fp=13!7_)3=ar178ju%e83$7b7y&+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = []
 
 
@@ -129,3 +130,8 @@ MEDIA_ROOT=os.path.join(BASE_DIR,"media")
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+#error page setting 
+
+handler404 = 'user.views.custom_404'

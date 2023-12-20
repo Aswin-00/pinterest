@@ -41,3 +41,8 @@ for filed_name in field_names:
  def get_object(self, queryset=None):
         uid = self.kwargs.get('uid')  # Get 'uid' from URL parameters
         return user.objects.get(uid=uid)  # Fetch the User by 'uid'
+
+
+# error in the coode 
+comments does't load basic detail of user like image and username 
+serch does't load slug

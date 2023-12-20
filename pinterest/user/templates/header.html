@@ -7,8 +7,9 @@
   <li><img src="{% static 'logo.png'%}" alt="logo" width="30" height="30"></li>
   <li><a href="{% url 'index' %}">Home</a></li>
   <li><a href="{% url 'login'%}">Login</a></li>
-  <li class="search">
-      <form action="search/" method="POST" class="search">
+  <li class="search" style="
+  width: 50%;">
+      <form action="/search/" method="POST" class="search">
                 {% csrf_token%}
           <input  type="search" placeholder="Search" id="search_tag" name="search_tag">
 
@@ -24,13 +25,15 @@
   <li></li>
   <li><a href="/edit/{{request.session.uid}}">Setting</a></li>
 
-  <li class="search">
-      <form action="search/" method="POST">
-                {% csrf_token%}
-          <input type="search" placeholder="Search" id="search_tag" name="search_tag">
+  <li class="search" style="
+  width: 50%;">
+  
+    <form action="/search/" method="POST" class="search">
+              {% csrf_token%}
+        <input  type="search" placeholder="Search" id="search_tag" name="search_tag">
 
-       </form>
-  </li>
+     </form>
+
   <li class="notification"><i class="fas fa-bell"></i></li>
   <li><i class="far fa-comment-dots"></i></li>
   <li><a href="{% url 'userpage' %}"'><img src="{{request.session.pic}}" alt="logo" width="30" height="30"></a></li>

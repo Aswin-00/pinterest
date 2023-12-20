@@ -135,8 +135,16 @@ def post_page(request,imgid):
 
     print(post.pin.url)
     post_comments=commets.objects.filter(pinid=imgid).order_by('-id')
+    
 
-    context={'post':post.pin.url,'imgid':imgid,'tag':post.tag,'comments':post_comments,'all_pins':all_pins}
+
+    context={'post':post.pin.url,
+             'imgid':imgid,
+             'tag':post.tag,
+             'comments':post_comments,
+             'all_pins':all_pins,
+             }
+
     return render(request,'post_page.html',context)
 
 #make a comment 
@@ -173,8 +181,45 @@ def my_pop_up(message,location):
 def search(request):
     if request.method=="POST":
         tag=request.POST.get('search_tag')
-        all_pins =userpins.objects.filter(tag=tag)
+        all_pins =userpins.objects.filter(tag__icontains=tag)
         context={'all_pins':all_pins}
         return render(request,'search_page.html',context)
-    
-    
+
+
+
+
+#custome error page 
+def custom_404(request, exception):
+    return render(request, '404.html', status=404)
+
+
+
+#approch we can do 
+# def image_comments(request, imgid):
+#     try:
+#         # Retrieve comments and user details in a single query
+#         combined_query = commets.objects.filter(pinid=imgid).order_by('-id').select_related('comment_user_detail')
+
+#         # Create a list to store the combined data
+#         combined_data = []
+
+#         # Iterate through the combined query results and build the combined data list
+#         for comment in combined_query:
+#             user_details = comment.comment_user_detail
+#             combined_data.append({
+#                 'username': user_details.user.username,
+#                 'content': comment.content,
+#                 'date': comment.date,
+#                 'pic': user_details.pic.url  # Assuming 'pic' is the field storing the user's profile picture
+#             })
+
+#         context = {
+#             'imgid': imgid,
+#             'combined_data': combined_data
+#         }
+
+#         return render(request, 'image_comments.html', context)
+
+#     except commets.DoesNotExist:
+#         # Handle the case where no comments are found for the specified image ID
+#         return render(request, 'comments_not_found.html')

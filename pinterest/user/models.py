@@ -40,4 +40,10 @@ class commets(models.Model):
         return (f'{self.pinid}')
 
 
-    
+# class UserProfile(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     pic = models.ImageField(upload_to='user_img/')
+#     uid = models.CharField(max_length=40, primary_key=True)
+
+#     def __str__(self):
+#         return f'Profile for {self.user.username}'

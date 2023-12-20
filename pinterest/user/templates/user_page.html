@@ -10,12 +10,15 @@
     <style>
         #image_upload {
             display: none; /* Initially hide the element */
+
         }
+
     </style>
 </head>
 
 <body>
    {% include 'header.html'%}
+   <br>
     
   <div class="user_profile">
     <img style="object-fit: cover;" width="150" height="150" class="rounded-circle" src="{{request.session.pic}}" alt="">

@@ -23,6 +23,10 @@
     padding: 1%;
 }
 
+nav>li #search {
+    width:50%;
+}
+
 .nav > li:nth-child(2){
     font-weight: 600;
 
@@ -41,7 +45,7 @@
     color: red;
 }
 .search{   
-    width: 70%;
+
     position: relative;
     padding: 1%;
     
@@ -85,7 +89,7 @@
 .container{
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill,250px);
+    grid-template-columns: repeat(auto-fill,300px);
     grid-template-rows: auto;
     justify-content: center;
     column-gap: 15px;
